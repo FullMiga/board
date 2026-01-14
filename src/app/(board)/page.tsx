@@ -1,4 +1,5 @@
 import { ArchiveIcon, MessageCircleIcon, ThumbsUpIcon } from "lucide-react";
+import type { Metadata } from "next";
 import { Button } from "@/components/button";
 import { Card } from "@/components/card";
 import { Section } from "@/components/section";
@@ -6,6 +7,10 @@ import { Section } from "@/components/section";
 interface BoardProps {
   searchParams: Promise<{ q?: string }>;
 }
+
+export const metadata: Metadata = {
+  title: "Board",
+};
 
 export default async function Board({ searchParams }: BoardProps) {
   const { q } = await searchParams;
