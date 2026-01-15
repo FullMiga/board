@@ -24,7 +24,7 @@ export const metadata: Metadata = {
 
 export default async function Board({ searchParams }: BoardProps) {
   const { q } = await searchParams;
-  const issues = await listIssues();
+  const issues = await listIssues({ search: q });
 
   return (
     <main className="grid grid-cols-4 gap-5 flex-1 items-stretch">
@@ -37,24 +37,30 @@ export default async function Board({ searchParams }: BoardProps) {
           <Section.IssueCount>{issues.backlog.length}</Section.IssueCount>
         </Section.Header>
         <Section.Content>
-          {issues.backlog.map((issue) => (
-            <Card.Root key={issue.id}>
-              <Card.Header>
-                <Card.Number>ISS-{issue.issueNumber}</Card.Number>
-                <Card.Title>{issue.title}</Card.Title>
-              </Card.Header>
-              <Card.Footer>
-                <Button>
-                  <ThumbsUpIcon size={12} />
-                  <span className="text-sm">4</span>
-                </Button>
-                <Button>
-                  <MessageCircleIcon size={12} />
-                  <span className="text-sm">2</span>
-                </Button>
-              </Card.Footer>
-            </Card.Root>
-          ))}
+          {issues.backlog.length === 0 ? (
+            <div className="flex items-center justify-center py-8 text-center">
+              <p className="text-sm text-navy-300">No issues found!</p>
+            </div>
+          ) : (
+            issues.backlog.map((issue) => (
+              <Card.Root key={issue.id}>
+                <Card.Header>
+                  <Card.Number>ISS-{issue.issueNumber}</Card.Number>
+                  <Card.Title>{issue.title}</Card.Title>
+                </Card.Header>
+                <Card.Footer>
+                  <Button>
+                    <ThumbsUpIcon size={12} />
+                    <span className="text-sm">4</span>
+                  </Button>
+                  <Button>
+                    <MessageCircleIcon size={12} />
+                    <span className="text-sm">2</span>
+                  </Button>
+                </Card.Footer>
+              </Card.Root>
+            ))
+          )}
         </Section.Content>
       </Section.Root>
 
@@ -67,24 +73,30 @@ export default async function Board({ searchParams }: BoardProps) {
           <Section.IssueCount>{issues.todo.length}</Section.IssueCount>
         </Section.Header>
         <Section.Content>
-          {issues.todo.map((issue) => (
-            <Card.Root key={issue.id}>
-              <Card.Header>
-                <Card.Number>ISS-{issue.issueNumber}</Card.Number>
-                <Card.Title>{issue.title}</Card.Title>
-              </Card.Header>
-              <Card.Footer>
-                <Button>
-                  <ThumbsUpIcon size={12} />
-                  <span className="text-sm">4</span>
-                </Button>
-                <Button>
-                  <MessageCircleIcon size={12} />
-                  <span className="text-sm">2</span>
-                </Button>
-              </Card.Footer>
-            </Card.Root>
-          ))}
+          {issues.todo.length === 0 ? (
+            <div className="flex items-center justify-center py-8 text-center">
+              <p className="text-sm text-navy-300">No issues found!</p>
+            </div>
+          ) : (
+            issues.todo.map((issue) => (
+              <Card.Root key={issue.id}>
+                <Card.Header>
+                  <Card.Number>ISS-{issue.issueNumber}</Card.Number>
+                  <Card.Title>{issue.title}</Card.Title>
+                </Card.Header>
+                <Card.Footer>
+                  <Button>
+                    <ThumbsUpIcon size={12} />
+                    <span className="text-sm">4</span>
+                  </Button>
+                  <Button>
+                    <MessageCircleIcon size={12} />
+                    <span className="text-sm">2</span>
+                  </Button>
+                </Card.Footer>
+              </Card.Root>
+            ))
+          )}
         </Section.Content>
       </Section.Root>
 
@@ -97,24 +109,30 @@ export default async function Board({ searchParams }: BoardProps) {
           <Section.IssueCount>{issues.in_progress.length}</Section.IssueCount>
         </Section.Header>
         <Section.Content>
-          {issues.in_progress.map((issue) => (
-            <Card.Root key={issue.id}>
-              <Card.Header>
-                <Card.Number>ISS-{issue.issueNumber}</Card.Number>
-                <Card.Title>{issue.title}</Card.Title>
-              </Card.Header>
-              <Card.Footer>
-                <Button>
-                  <ThumbsUpIcon size={12} />
-                  <span className="text-sm">4</span>
-                </Button>
-                <Button>
-                  <MessageCircleIcon size={12} />
-                  <span className="text-sm">2</span>
-                </Button>
-              </Card.Footer>
-            </Card.Root>
-          ))}
+          {issues.in_progress.length === 0 ? (
+            <div className="flex items-center justify-center py-8 text-center">
+              <p className="text-sm text-navy-300">No issues found!</p>
+            </div>
+          ) : (
+            issues.in_progress.map((issue) => (
+              <Card.Root key={issue.id}>
+                <Card.Header>
+                  <Card.Number>ISS-{issue.issueNumber}</Card.Number>
+                  <Card.Title>{issue.title}</Card.Title>
+                </Card.Header>
+                <Card.Footer>
+                  <Button>
+                    <ThumbsUpIcon size={12} />
+                    <span className="text-sm">4</span>
+                  </Button>
+                  <Button>
+                    <MessageCircleIcon size={12} />
+                    <span className="text-sm">2</span>
+                  </Button>
+                </Card.Footer>
+              </Card.Root>
+            ))
+          )}
         </Section.Content>
       </Section.Root>
 
@@ -127,24 +145,30 @@ export default async function Board({ searchParams }: BoardProps) {
           <Section.IssueCount>{issues.done.length}</Section.IssueCount>
         </Section.Header>
         <Section.Content>
-          {issues.done.map((issue) => (
-            <Card.Root key={issue.id}>
-              <Card.Header>
-                <Card.Number>ISS-{issue.issueNumber}</Card.Number>
-                <Card.Title>{issue.title}</Card.Title>
-              </Card.Header>
-              <Card.Footer>
-                <Button>
-                  <ThumbsUpIcon size={12} />
-                  <span className="text-sm">4</span>
-                </Button>
-                <Button>
-                  <MessageCircleIcon size={12} />
-                  <span className="text-sm">2</span>
-                </Button>
-              </Card.Footer>
-            </Card.Root>
-          ))}
+          {issues.done.length === 0 ? (
+            <div className="flex items-center justify-center py-8 text-center">
+              <p className="text-sm text-navy-300">No issues found!</p>
+            </div>
+          ) : (
+            issues.done.map((issue) => (
+              <Card.Root key={issue.id}>
+                <Card.Header>
+                  <Card.Number>ISS-{issue.issueNumber}</Card.Number>
+                  <Card.Title>{issue.title}</Card.Title>
+                </Card.Header>
+                <Card.Footer>
+                  <Button>
+                    <ThumbsUpIcon size={12} />
+                    <span className="text-sm">4</span>
+                  </Button>
+                  <Button>
+                    <MessageCircleIcon size={12} />
+                    <span className="text-sm">2</span>
+                  </Button>
+                </Card.Footer>
+              </Card.Root>
+            ))
+          )}
         </Section.Content>
       </Section.Root>
     </main>
