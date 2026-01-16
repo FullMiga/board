@@ -2,7 +2,9 @@ import { ArchiveIcon, MoveLeftIcon } from "lucide-react";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Suspense } from "react";
+import { createComment } from "@/http/create-comment";
 import { getIssue } from "@/http/get-issue";
+import { IssueCommentForm } from "./issue-comment-form";
 import { IssueCommentsList } from "./issue-comments/issue-comments-list";
 import { IssueCommentsSkeleton } from "./issue-comments/issue-comments-skeleton";
 import { IssueLikeButton } from "./issue-like-button";
@@ -34,6 +36,12 @@ export default async function IssuePage({ params }: IssuePageProps) {
   const { id } = await params;
   const issue = await getIssue({ id });
 
+  async function handleCreateComment(text: string) {
+    "use server";
+
+    await createComment({ issueId: issue.id, text });
+  }
+
   return (
     <main className="max-w-225 mx-auto w-full flex flex-col gap-4 p-6 bg-navy-800 border-[0.5px] border-navy-500 rounded-xl">
       <Link
@@ -60,6 +68,7 @@ export default async function IssuePage({ params }: IssuePageProps) {
 
       <div className="flex flex-col gap-2">
         <span className="font-semibold">Comments</span>
+        <IssueCommentForm onCreateComment={handleCreateComment} />
 
         <div className="mt-3">
           <Suspense fallback={<IssueCommentsSkeleton />}>
