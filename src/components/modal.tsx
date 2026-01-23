@@ -3,9 +3,11 @@ import * as Dialog from "@radix-ui/react-dialog";
 import { useRouter } from "next/navigation";
 import { twMerge } from "tailwind-merge";
 
-interface ModalProps extends Dialog.DialogContentProps {}
+interface ModalProps extends Dialog.DialogContentProps {
+  open: boolean;
+}
 
-export function Modal({ className, ...props }: ModalProps) {
+export function Modal({ open, className, ...props }: ModalProps) {
   const router = useRouter();
 
   function handleOpenChange(open: boolean) {
@@ -15,7 +17,7 @@ export function Modal({ className, ...props }: ModalProps) {
   }
 
   return (
-    <Dialog.Root defaultOpen onOpenChange={handleOpenChange}>
+    <Dialog.Root defaultOpen onOpenChange={handleOpenChange} open={open}>
       <Dialog.Portal>
         <Dialog.Overlay className="fixed inset-0 z-50 bg-black/60" />
         <Dialog.Content

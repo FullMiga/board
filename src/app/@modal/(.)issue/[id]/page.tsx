@@ -1,7 +1,7 @@
-import { Modal } from "@/components/modal";
-import { BackButton } from "./back-button";
 import { DialogTitle } from "@radix-ui/react-dialog";
 import IssueDetails from "@/app/issue/[id]/issue-details";
+import { Modal } from "@/components/modal";
+import { BackButton } from "./back-button";
 
 interface IssueModalProps {
   params: Promise<{ id: string }>;
@@ -11,7 +11,7 @@ export default async function IssueModal({ params }: IssueModalProps) {
   const { id } = await params;
 
   return (
-    <Modal>
+    <Modal open={!!id}>
       <div className="flex flex-col gap-5 p-6">
         <BackButton />
         <DialogTitle className="sr-only">Issue details</DialogTitle>
